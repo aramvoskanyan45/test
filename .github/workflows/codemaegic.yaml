@@ -1,35 +1,25 @@
 workflows:
   ios-workflow:
-    name: iOS Build
+    name: Capacitor iOS Build
 
     environment:
       node: 22
       xcode: latest
+      cocoapods: default
 
     scripts:
       - name: Install dependencies
         script: |
           npm install
 
-      - name: Capacitor Sync
+      - name: Sync Capacitor
         script: |
           npx cap sync ios
 
-      - name: Install CocoaPods
-        script: |
-          cd ios/App
-          pod install
-          cd ../..
-
-      - name: Build IPA
-        script: |
-          xcodebuild \
-          -workspace ios/App/App.xcworkspace \
-          -scheme App \
-          -configuration Release \
-          -sdk iphoneos \
-          archive \
-          -archivePath build/App.xcarchive
-
     artifacts:
-      - build/**/*.ipa
+      - ios/App/build/**/*.ipa
+
+    publishing:
+      email:
+        recipients:
+          - aramvoskanyan45@gmail.com
