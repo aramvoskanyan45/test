@@ -1,0 +1,10 @@
+{
+  "appId": "com.offline.app",
+  "appName": "offline",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}
