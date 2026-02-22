@@ -1,36 +1,32 @@
 workflows:
-  ios-workflow:
-    name: iOS Build
+  ios-altstore-build:
+    name: Capacitor IPA Build
 
     environment:
       node: 22
       xcode: latest
 
     scripts:
-      - name: Install dependencies
+      - name: Install npm packages
         script: |
           npm install
 
-      - name: Capacitor Sync
+      - name: Sync Capacitor
         script: |
           npx cap sync ios
 
-      - name: Install CocoaPods
-        script: |
-          cd ios/App
-          pod install
-          cd ../..
-
-      - name: Build IPA
+      - name: Build archive
         script: |
           xcodebuild \
-            -workspace ios/App/App.xcworkspace \
+            -project ios/App/App.xcodeproj \
             -scheme App \
             -configuration Release \
             -sdk iphoneos \
             archive \
             -archivePath build/App.xcarchive
 
+      - name: Export IPA
+        script: |
           xcodebuild \
             -exportArchive \
             -archivePath build/App.xcarchive \
@@ -39,8 +35,3 @@ workflows:
 
     artifacts:
       - build/**/*.ipa
-
-    publishing:
-      email:
-        recipients:
-          - aramvoskanyan45@gmail.com
