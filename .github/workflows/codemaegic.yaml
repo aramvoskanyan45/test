@@ -15,7 +15,6 @@ workflows:
         script: |
           npx cap sync ios
 
-      ✅ IMPORTANT STEP
       - name: Install CocoaPods
         script: |
           cd ios/App
