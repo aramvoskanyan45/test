@@ -17,19 +17,25 @@ workflows:
 
       - name: Install CocoaPods
         script: |
-          cd ios
+          cd ios/App
           pod install
           cd ../..
 
       - name: Build IPA
         script: |
           xcodebuild \
-          -workspace ios/App.xcworkspace \
-          -scheme App \
-          -configuration Release \
-          -sdk iphoneos \
-          archive \
-          -archivePath build/App.xcarchive
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            archive \
+            -archivePath build/App.xcarchive
+
+          xcodebuild \
+            -exportArchive \
+            -archivePath build/App.xcarchive \
+            -exportOptionsPlist ios/App/ExportOptions.plist \
+            -exportPath build
 
     artifacts:
       - build/**/*.ipa
