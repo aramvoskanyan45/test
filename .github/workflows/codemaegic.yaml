@@ -1,16 +1,16 @@
 workflows:
   ios-workflow:
     name: iOS Build
-    max_build_duration: 60
-
     environment:
-      xcode: latest
+      node: 18
 
     scripts:
       - name: Install dependencies
         script: |
           npm install
-          npm install -g @capacitor/cli
+
+      - name: Capacitor Sync
+        script: |
           npx cap sync ios
 
       - name: Build IPA
@@ -19,7 +19,8 @@ workflows:
           -scheme App \
           -configuration Release \
           -sdk iphoneos \
-          archive -archivePath build/App.xcarchive
+          archive \
+          -archivePath build/App.xcarchive
 
     artifacts:
       - build/**/*.ipa

@@ -2,6 +2,7 @@
   "appId": "com.offline.app",
   "appName": "offline",
   "webDir": "www",
+  "bundledWebRuntime": false,
   "plugins": {
     "SplashScreen": {
       "launchAutoHide": false
