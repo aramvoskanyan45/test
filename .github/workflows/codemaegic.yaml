@@ -1,8 +1,9 @@
 workflows:
   ios-workflow:
     name: iOS Build
+
     environment:
-      node: 18
+      node: 22
 
     scripts:
       - name: Install dependencies
