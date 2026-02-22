@@ -4,6 +4,7 @@ workflows:
 
     environment:
       node: 22
+      xcode: latest
 
     scripts:
       - name: Install dependencies
@@ -14,9 +15,17 @@ workflows:
         script: |
           npx cap sync ios
 
+      ✅ IMPORTANT STEP
+      - name: Install CocoaPods
+        script: |
+          cd ios/App
+          pod install
+          cd ../..
+
       - name: Build IPA
         script: |
-          xcodebuild -workspace ios/App/App.xcworkspace \
+          xcodebuild \
+          -workspace ios/App/App.xcworkspace \
           -scheme App \
           -configuration Release \
           -sdk iphoneos \
