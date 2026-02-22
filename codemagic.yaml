@@ -5,6 +5,9 @@ workflows:
     environment:
       node: 22
       xcode: latest
+      vars:
+        APPLE_ID: your_email@apple.com
+        APPLE_PASSWORD: your_app_password
 
     scripts:
       - name: Install npm packages
